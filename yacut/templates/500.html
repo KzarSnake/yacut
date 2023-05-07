@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}500. Что происходит?{% endblock %}
+{% block content %}
+<main>
+  <section class="container my-5">
+    <div class="row">
+      <div class="container my-5 px-4">
+        <h1 class="text-center mb-5">Творится что-то непонятное!</h1>
+        <div class="text-center my-5 px-4">
+          <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='img/404_smile.png') }}" alt="" />
+        </div>
+        <p class="text-center">
+          Возможно, на сервере произошёл сбой или проводятся кратковременные
+          технические работы. Попробуйте заварить чаю и обновить страницу через
+          пару минут. Даже, если ничего не заработает - у вас будет чай.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %} 

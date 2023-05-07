@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+{% block title %}404. Кажется, у нас ошибка.{% endblock %}
+{% block content %}
+<main>
+  <section class="container my-5">
+    <div class="row">
+      <div class="container my-5 px-4">
+        <h1 class="text-center mb-5">Как вы сюда попали?</h1>
+        <div class="text-center my-5 px-4">
+          <img class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='img/404_smile.png') }}" alt="" />
+        </div>
+        <p class="text-center">Страница таинственно исчезла, а возможно ее и не было.</p>
+        <p class="text-center">
+          <a href="{{ url_for('index_view') }}">Вернуться на главную</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %} 
