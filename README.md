@@ -28,14 +28,7 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-**Создайте в корневой директории файл .env со следующим константами:**
-
-```
-FLASK_APP=yacut
-FLASK_ENV=development
-DATABASE_URI=sqlite:///db.sqlite3
-SECRET_KEY=<ваш_секретный_ключ>
-```
+**Переименуйте файл .env.example в .env**
 
 ## Запуск:
 Находясь в корневой директории проекта, выполните в терминале команду:

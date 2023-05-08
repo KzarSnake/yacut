@@ -1,6 +1,9 @@
+from http import HTTPStatus
 from re import fullmatch
 
 from flask import jsonify, request
+
+from settings import PATTERN
 
 from . import app, db
 from .error_handlers import InvalidAPIUsage
@@ -10,7 +13,6 @@ from .views import get_unique_short_id
 
 @app.route('/api/id/', methods=['POST'])
 def create_url():
-    PATTERN = r'^[a-zA-Z0-9]{1,16}$'
 
     data = request.get_json()
     if not data:
@@ -28,12 +30,12 @@ def create_url():
     url_map.from_dict(data)
     db.session.add(url_map)
     db.session.commit()
-    return jsonify(url_map.to_dict()), 201
+    return jsonify(url_map.to_dict()), HTTPStatus.CREATED
 
 
 @app.route('/api/id/<string:short_id>/', methods=['GET'])
 def get_url(short_id):
     url_map = URLMap.query.filter_by(short=short_id).first()
     if not url_map:
-        raise InvalidAPIUsage('Указанный id не найден', 404)
-    return jsonify(url=url_map.original), 200
+        raise InvalidAPIUsage('Указанный id не найден', HTTPStatus.NOT_FOUND)
+    return jsonify(url=url_map.original), HTTPStatus.OK

@@ -17,21 +17,21 @@ def get_unique_short_id():
 @app.route('/', methods=['GET', 'POST'])
 def index_view():
     form = URLForm()
-    if form.validate_on_submit():
-        short_url = form.custom_id.data
-        if not short_url:
-            short_url = get_unique_short_id()
-        elif URLMap.query.filter_by(short=short_url).first():
-            flash(f'Имя {short_url} уже занято!')
-            return render_template('index.html', form=form)
-        urlmap = URLMap(
-            original=form.original_link.data,
-            short=short_url,
-        )
-        db.session.add(urlmap)
-        db.session.commit()
-        return render_template('index.html', form=form, short=short_url)
-    return render_template('index.html', form=form)
+    if not form.validate_on_submit():
+        return render_template('index.html', form=form)
+    short_url = form.custom_id.data
+    if not short_url:
+        short_url = get_unique_short_id()
+    elif URLMap.query.filter_by(short=short_url).first():
+        flash(f'Имя {short_url} уже занято!')
+        return render_template('index.html', form=form)
+    urlmap = URLMap(
+        original=form.original_link.data,
+        short=short_url,
+    )
+    db.session.add(urlmap)
+    db.session.commit()
+    return render_template('index.html', form=form, short=short_url)
 
 
 @app.route('/<string:custom_id>')
